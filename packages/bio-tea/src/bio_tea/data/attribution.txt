@@ -1,0 +1,10 @@
+Attribution for the vendored TEA organism list, species.txt
+
+This file is a derivative of "speclist.txt" by UniProt Consortium,  
+distributed under the Creative Commons Attribution 4.0 License (CC BY 4.0).
+Original source: https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/docs/speclist.txt
+
+Modifications (reformatted/filtered structure) were made by tznurmin on 2025-02-12.
+
+This modified version is also distributed under the Creative Commons Attribution 4.0 License (CC BY 4.0).
+For license details, visit: https://creativecommons.org/licenses/by/4.0/

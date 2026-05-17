@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bio-tea"
+version = "1.0.0"
+authors = [{ name = "tznurmin" }]
+description = "Taxonomic Entity Augmentation"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[project.scripts]
+bio-tea-inspect = "bio_tea.datasets.cli:inspect_main"
+bio-tea-sample = "bio_tea.datasets.cli:sample_main"
+bio-tea-validate = "bio_tea.datasets.cli:validate_main"
+bio-tea-stats = "bio_tea.datasets.cli:stats_main"
+bio-tea-qa = "bio_tea.datasets.cli:qa_main"
+bio-tea-manifest-compare = "bio_tea.datasets.cli:manifest_compare_main"
+
+[tool.setuptools]
+include-package-data = true
+package-dir = { "" = "src" }
+packages = [
+  "bio_tea",
+  "bio_tea.data",
+  "bio_tea.augment",
+  "bio_tea.resources",
+  "bio_tea.transforms",
+  "bio_tea.datasets",
+]
+
+[tool.setuptools.package-data]
+"bio_tea.data" = ["species.txt", "attribution.txt"]

@@ -1,0 +1,9 @@
+TEA
+Copyright 2026 tznurmin
+
+This codebase includes a modified UniProt organism list derived from speclist.txt.
+The vendored organism list is distributed under the Creative Commons Attribution
+4.0 License (CC BY 4.0). See the bundled attribution file shipped with the
+organism list.
+
+Downloaded TEA_curated_data material is external and separately licensed.

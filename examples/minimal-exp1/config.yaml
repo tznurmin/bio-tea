@@ -1,0 +1,34 @@
+results_root: examples/minimal-exp1/results
+
+tokenizer:
+  name_or_path: michiyasunaga/BioLinkBERT-base
+  model_max_length: 64
+
+training:
+  profiles_dir: profiles
+  hf:
+    dataloader_pin_memory: true
+    local_files_only: false
+  models:
+    - id: biolinkbert-base
+      model_name_or_path: michiyasunaga/BioLinkBERT-base
+      tokenizer:
+        name_or_path: michiyasunaga/BioLinkBERT-base
+      max_length: 64
+      check_model_max_length: false
+  exp1:
+    enabled: true
+    seeds: [1]
+    train_variants: [all]
+    eval_sets: [unaugmented, augmented_exclusive]
+    eval_split: test
+    resume: false
+    force: true
+    save_model:
+      mode: none
+    hparams:
+      epochs: 1
+      learning_rate: 0.00005
+      per_device_train_batch_size: 2
+      per_device_eval_batch_size: 2
+      report_each_epoch: false

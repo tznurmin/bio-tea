@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bio-tea-runner"
+version = "1.0.0"
+authors = [{ name = "tznurmin" }]
+description = "Training and experiment runner utilities for bio-tea"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+  "bio-tea>=1.0.0,<2.0.0",
+  "PyYAML>=6.0",
+  "accelerate>=0.20",
+  "datasets>=2.0",
+  "evaluate>=0.4",
+  "numpy>=1.23",
+  "seqeval>=1.2",
+  "torch>=2.0",
+  "transformers>=4.0",
+]
+
+[project.scripts]
+bio-tea-runner-exp1 = "bio_tea_runner.cli:run_exp1_main"
+bio-tea-runner-exp2 = "bio_tea_runner.cli:run_exp2_main"
+bio-tea-runner-exp3 = "bio_tea_runner.cli:run_exp3_main"
+bio-tea-runner-exp1-report = "bio_tea_runner.cli:exp1_report_main"
+bio-tea-runner-exp1-validate = "bio_tea_runner.cli:exp1_validate_main"
+bio-tea-runner-exp1-calibrate = "bio_tea_runner.cli:calibrate_exp1_main"
+bio-tea-runner-report = "bio_tea_runner.cli:report_main"
+bio-tea-runner-validate = "bio_tea_runner.cli:validate_main"
+
+[tool.setuptools]
+include-package-data = true
+package-dir = { "" = "src" }
+packages = [
+  "bio_tea_runner",
+  "bio_tea_runner.training",
+]
