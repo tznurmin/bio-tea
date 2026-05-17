@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+release_artifacts/
+.cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+results/
+logs/
+artifacts/
+tmp/
+
+*.tar.gz
+*.tar.gz.sha256
