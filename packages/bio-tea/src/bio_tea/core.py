@@ -156,6 +156,10 @@ class TEA:
 
     def augment(self, text: str, curation_data: dict, scramble=None, l2l=None) -> str:
         '''
+        Augment a tokenised example using token-indexed curation data.
+
+        The text argument must be a list of tokens.
+        
         Pool labels with l2l. By default, l2l preserves all labels.
         When l2l is provided, labels not present in the mapping are assigned 'O'.
         '''
