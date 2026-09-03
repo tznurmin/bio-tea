@@ -1,11 +1,11 @@
-# bio-tea
+# Taxonomic Entity Augmentation (TEA)
 
-Taxonomic Entity Augmentation for biomedical NLP datasets.
+Taxonomic Entity Augmentation for biological texts.
 
-Install from this directory:
+Install:
 
 ```bash
-python -m pip install .
+python -m pip install taxonomic-entity-augmentation
 ```
 
 Use:

@@ -1,21 +1,23 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bio-tea"
-version = "1.0.0"
+name = "taxonomic-entity-augmentation"
+version = "1.0.2"
 authors = [{ name = "tznurmin" }]
 description = "Taxonomic Entity Augmentation"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "Apache-2.0" }
-classifiers = [
-  "License :: OSI Approved :: Apache Software License",
-]
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
 dependencies = [
   "PyYAML>=6.0",
 ]
+
+[project.urls]
+Repository = "https://github.com/tznurmin/bio-tea"
+Issues = "https://github.com/tznurmin/bio-tea/issues"
 
 [project.scripts]
 bio-tea-inspect = "bio_tea.datasets.cli:inspect_main"
