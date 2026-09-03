@@ -1,29 +1,30 @@
 # Taxonomic Entity Augmentation (TEA)
 
-TEA provides taxonomic entity augmentation for biological texts. It
-supports species-name substitution, strain-name scrambling, sentence windowing,
-token-budget handling, and label materialisation for TEA curation data.
+TEA provides taxonomic entity augmentation for biological texts. It supports
+species-name substitution, strain-name scrambling, sentence windowing,
+token-budget handling, and token-level label materialisation from curated data.
 
-## Contents
-
-- `packages/bio-tea`: augmentation library
-- `packages/bio-tea-runner`: training/reporting runner utilities
-- `examples/minimal-exp1`: a small prepared dataset and config for a usage example
-- `packages/bio-tea/src/bio_tea/data/species.txt`: vendored UniProt-derived
-  organism list used for species-name sampling
+This repository contains the augmentation library, dataset utilities, and a
+separate runner for fine-tuning and reporting.
 
 ## Installation
 
-From the project root:
+Install the augmentation library from PyPI:
 
 ```bash
-python -m pip install ./packages/bio-tea
+python -m pip install taxonomic-entity-augmentation
+```
+
+Install the runner from a repository checkout:
+
+```bash
+git clone https://github.com/tznurmin/bio-tea.git
+cd bio-tea
 python -m pip install ./packages/bio-tea-runner
 ```
 
-The runner package installs the Hugging Face training stack declared in
-`packages/bio-tea-runner/pyproject.toml`. GPU execution requires a CUDA-enabled
-PyTorch installation for the local system.
+The runner installs the Hugging Face training stack. GPU execution requires a
+CUDA-enabled PyTorch installation for the local system.
 
 ## Augmentation example
 
@@ -57,8 +58,8 @@ bio-tea-manifest-compare --help
 ```
 
 Utilities that operate on curated TEA source data require
-[TEA_curated_data](https://github.com/tznurmin/TEA_curated_data). Download
-v1.1 separately and point TEA to the extracted directory:
+[TEA_curated_data](https://github.com/tznurmin/TEA_curated_data). Download v1.1
+and point TEA to the extracted directory:
 
 ```bash
 wget https://github.com/tznurmin/TEA_curated_data/archive/refs/tags/v1.1.tar.gz -qO - | tar -xz
@@ -69,10 +70,10 @@ export TEA_CURATED_ROOT="$PWD/TEA_curated_data"
 `TEA_CURATED_DATA` is also accepted. TEA_curated_data is external to TEA and
 separately licensed.
 
-## Usage example
+## Fine-tuning example
 
-The `examples/minimal-exp1` directory contains a small prepared dataset and
-config for one BioLinkBERT base fine-tuning run
+The [`examples/minimal-exp1`](examples/minimal-exp1) directory contains a small
+prepared dataset and configuration for one BioLinkBERT base fine-tuning run
 (`michiyasunaga/BioLinkBERT-base`):
 
 ```bash
@@ -87,9 +88,6 @@ bio-tea-runner-exp1 \
   --report-out examples/minimal-exp1/results/report.json
 ```
 
-PyTorch uses CUDA automatically when a CUDA-enabled PyTorch install and visible
-GPU are available.
-
 Main outputs:
 
 ```text
@@ -103,15 +101,13 @@ Detailed run artifacts are written under:
 examples/minimal-exp1/results/profiles/
 ```
 
-The example trains and evaluates the model but does not save fine-tuned model
+The example trains and evaluates the model without saving fine-tuned model
 weights.
 
 ## Licence
 
-- Code: [Apache License 2.0](LICENSE).
-- Vendored UniProt organism list:
-  [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-  Attribution is provided in
-  [data attribution file](packages/bio-tea/src/bio_tea/data/attribution.txt).
+- Code: [Apache License 2.0](LICENSE)
+- Vendored UniProt organism list: [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/),
+  with details in the [data attribution file](packages/bio-tea/src/bio_tea/data/attribution.txt)
 - Downloaded [TEA_curated_data](https://github.com/tznurmin/TEA_curated_data)
-  material is external and separately licensed.
+  material is external and separately licensed

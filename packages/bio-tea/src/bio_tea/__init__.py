@@ -15,6 +15,6 @@
 
 from .core import TEA
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 __all__ = ["TEA", "__version__"]
