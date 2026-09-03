@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -9,12 +9,10 @@ authors = [{ name = "tznurmin" }]
 description = "Training and experiment runner utilities for bio-tea"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "Apache-2.0" }
-classifiers = [
-  "License :: OSI Approved :: Apache Software License",
-]
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
 dependencies = [
-  "bio-tea>=1.0.0,<2.0.0",
+  "taxonomic-entity-augmentation>=1.0.2,<2.0.0",
   "PyYAML>=6.0",
   "accelerate>=0.20",
   "datasets>=2.0",

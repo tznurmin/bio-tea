@@ -1,6 +1,6 @@
 # Taxonomic Entity Augmentation (TEA)
 
-TEA provides taxonomic entity augmentation for biomedical NLP datasets. It
+TEA provides taxonomic entity augmentation for biological texts. It
 supports species-name substitution, strain-name scrambling, sentence windowing,
 token-budget handling, and label materialisation for TEA curation data.
 
