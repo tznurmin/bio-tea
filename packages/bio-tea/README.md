@@ -1,24 +1,35 @@
 # Taxonomic Entity Augmentation (TEA)
 
-TEA augments taxonomic entities in biological texts. It can be applied directly
-to text and used to materialise augmented labelled datasets. Its two primary
-transformations target potential overfitting to species and strain names.
+TEA makes taxonomic names an explicit experimental variable in biological text.
+The library switches species names and scrambles strain identifiers while
+keeping token labels aligned. The resulting examples support model analysis and
+provide additional training material for generalisation beyond the names
+represented in the original dataset.
+
+Within each matched pair, only the transformed names differ, allowing their
+effect on model output to be compared directly.
+
+The [BioBERT fine-tuning experiments](https://github.com/tznurmin/TEA_ft)
+demonstrate the workflow on two curated datasets: Pathogen Identifier and Strain
+Tagger. On evaluation examples whose taxonomic names were absent from training,
+augmentation raised F1 from 26.2% to 59.7% for pathogen identification and from
+57.2% to 70.6% for strain tagging.
+
+For a separate word-level perturbation analysis, see the
+[taxonomic perturbation experiments](https://github.com/tznurmin/TEA_perturb).
 
 ## Species substitution
 
-Species names can be substituted automatically in biological text.
+Full and abbreviated species mentions are substituted consistently throughout
+the text.
 
 ![Original article excerpt and two species-substituted versions shown side by side](https://raw.githubusercontent.com/tznurmin/bio-tea/main/assets/species-substitution.png)
 
 ## Strain scrambling
 
-Strain identifiers can be scrambled while retaining their format.
+Strain identifiers are scrambled while retaining their format.
 
 ![Original strain description and one strain-scrambled version shown side by side](https://raw.githubusercontent.com/tznurmin/bio-tea/main/assets/strain-scrambling.png)
-
-For curated datasets, the augmentation pipeline can extract complete sentence
-windows within a token budget and produce aligned token labels for original,
-species-switched, strain-scrambled, and combined examples.
 
 ## Installation
 
@@ -49,6 +60,8 @@ print(tea.switch("Escherichia coli was measured in culture."))
 print(tea.scramble("The strain ATCC 25922 was included.", ["ATCC 25922"], force_diff=True))
 ```
 
+Setting `rseed` makes species substitutions and strain scrambling reproducible.
+
 With `transformers` installed, a Hugging Face model tokenizer can be supplied
 directly:
 
@@ -58,14 +71,23 @@ from bio_tea import TEA
 
 
 tokenizer = AutoTokenizer.from_pretrained(
-    "dmis-lab/biobert-base-cased-v1.2"
+    "dmis-lab/biobert-base-cased-v1.2",
+    do_lower_case=False,
 )
 tea = TEA(tokenizer, rseed=42)
 
 print(tea.switch("Escherichia coli was measured in culture."))
 ```
 
-## Dataset utilities
+## Labelled datasets
+
+[TEA_curated_data](https://github.com/tznurmin/TEA_curated_data) provides curated
+biological source texts and taxonomic entity annotations for generating
+labelled datasets. The augmentation pipeline can extract complete sentence
+windows within a token budget and produce aligned token labels for original,
+species-switched, strain-scrambled, and combined examples.
+
+### Command-line utilities
 
 The package also provides utilities for inspecting and validating generated
 example sets. These are not required for basic augmentation.
@@ -83,10 +105,7 @@ Run any command with `--help` for its arguments.
 
 ### Curated dataset example
 
-[TEA_curated_data](https://github.com/tznurmin/TEA_curated_data) provides a
-complete dataset for applying these utilities to curated biological source
-material. To use it, download v1.1 and select the extracted directory as the
-data source:
+Download v1.1 and select the extracted directory as the data source:
 
 ```bash
 wget https://github.com/tznurmin/TEA_curated_data/archive/refs/tags/v1.1.tar.gz -qO - | tar -xz
